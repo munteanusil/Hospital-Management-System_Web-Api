@@ -1,5 +1,5 @@
-﻿using Hospital_Management_System_Web_Api.EntitiesModels;
-using Hospital_Management_System_Web_Api.Interface;
+﻿using Hospital_Management_System_Web_Api.Abstractions;
+using Hospital_Management_System_Web_Api.EntitiesModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,5 +32,7 @@ namespace Hospital_Management_System_Web_Api.Entities
         public DateTimeOffset CreatedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public DateTimeOffset UpdatedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Guid DoctorId { get; internal set; }
+        public object Symptoms { get; internal set; }
     }
 }

@@ -4,6 +4,7 @@ using Hospital_Management_System_Web_Api.Hospital.Repository.UnitofWork;
 using Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Contracts;
 using Hospital_Management_System_Web_Api.RequiredData.GetDataTo;
 using Hospital_Management_System_Web_Api.RequiredData.PostDataTo;
+using System.Data.Entity;
 
 namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Implementations
 {
@@ -25,7 +26,7 @@ namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Impl
 
             if (filter != null)
             {
-                result = result.Where(x => x.Name.Contains(filter) || x.Username.Contains(filter) || x.Email.Contains(filter) || x.Phone.Contains(filter));
+                result = result.Where(x => x.DoctorName.Contains(filter) || x.Username.Contains(filter) || x.Email.Contains(filter) || x.PhoneNumber.Contains(filter));
             }
 
             if (!includeDeleted)
@@ -56,8 +57,8 @@ namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Impl
 
         public GetResponse<MedicalReportGetDto> GetDoctorMedicalReports(Guid id, int? skip, int? take, string filter, bool includeDeleted)
         {
-            var result = _unitOfWork.MedicalReportsRepository.Get(include: i => i.Include(x => x.Appointment),
-                                                                   filter: f => f.Appointment.Doctor == id);
+            var result = _unitOfWork.MedicalReportsRepository.Get(include: i => (Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<EntitiesModels.MedicalReport, object>)i.Include(x => x.Appointment),
+                                                                   filter: f => f.Appointment.DoctorId == id);
 
             var totalCount = result.Count();
 
@@ -94,7 +95,7 @@ namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Impl
 
         public GetResponse<SpecialtyGetDto> GetDoctorSpecialties(Guid id, int? skip, int? take, string filter, bool includeDeleted)
         {
-            var doctorSpecialties = _unitOfWork.DoctorSpecialtiesRepository.Get(include: i => i.Include(x => x.Specialty),
+            var doctorSpecialties = _unitOfWork.DoctorSpecialtiesRepository.Get(include: i => (Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<EntitiesModels.DoctorSpecialty, object>)i.Include(x => x.Specialty),
                                                                                  filter: f => f.Id == id);
 
             var result = doctorSpecialties.Select(s => s.Specialty);
@@ -113,7 +114,7 @@ namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Impl
                 }
                 else
                 {
-                    result = result.Where(x => x.Name.Contains(filter));
+                    result = result.Where(x => x.SpecialtyName.Contains(filter));
                 }
             }
 
@@ -145,7 +146,7 @@ namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Impl
 
         public GetResponse<AppointmentGetDto> GetDoctorAppointments(Guid id, int? skip, int? take, string filter, bool includeDeleted)
         {
-            var result = _unitOfWork.AppointmentsRepository.Get(filter: f => f.Doctor == id);
+            var result = _unitOfWork.AppointmentsRepository.Get(filter: f => f.DoctorId == id);
 
             var totalCount = result.Count();
 

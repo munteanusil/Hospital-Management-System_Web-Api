@@ -1,6 +1,6 @@
-﻿using Hospital_Management_System_Web_Api.Entities;
+﻿using Hospital_Management_System_Web_Api.Abstractions;
+using Hospital_Management_System_Web_Api.Entities;
 using Hospital_Management_System_Web_Api.EntitiesModels;
-using Hospital_Management_System_Web_Api.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Management_System_Web_Api

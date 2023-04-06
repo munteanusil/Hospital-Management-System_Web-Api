@@ -8,8 +8,8 @@ using System;
 using Hospital_Management_System_Web_Api.Entities;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
-using Hospital_Management_System_Web_Api.Interface;
 using Microsoft.EntityFrameworkCore;
+using Hospital_Management_System_Web_Api.Abstractions;
 
 namespace Hospital_Management_System_Web_Api.Hospital.Repository.Repositories.Implementations
 {
@@ -85,9 +85,6 @@ namespace Hospital_Management_System_Web_Api.Hospital.Repository.Repositories.Im
             _context?.Dispose();
         }
 
-        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

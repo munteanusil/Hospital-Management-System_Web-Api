@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Hospital_Management_System_Web_Api.EntitiesModels;
-using Hospital_Management_System_Web_Api.Interface;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
@@ -24,6 +23,8 @@ namespace Hospital_Management_System_Web_Api.Entities
         public byte[] PasswordSalt { get; set;}
           
         public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
       
         public ICollection<Appointment> Appointments { get; set; }
         public ICollection<DoctorSpecialty> DoctorSpeciality { get; set;}

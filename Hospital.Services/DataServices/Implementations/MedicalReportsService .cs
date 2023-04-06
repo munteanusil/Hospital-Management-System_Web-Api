@@ -4,6 +4,7 @@ using Hospital_Management_System_Web_Api.Hospital.Repository.UnitofWork;
 using Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Contracts;
 using Hospital_Management_System_Web_Api.RequiredData.GetDataTo;
 using Hospital_Management_System_Web_Api.RequiredData.PostDataTo;
+using System.Data.Entity;
 
 namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Implementations
 {
@@ -20,7 +21,7 @@ namespace Hospital_Management_System_Web_Api.Hospital.Services.DataServices.Impl
 
         public GetResponse<MedicalReportGetDto> Get(int? skip, int? take, DateTimeOffset? startDate, DateTimeOffset? endDate, string filter, bool includeDeleted)
         {
-            var result = _unitOfWork.MedicalReportsRepository.Get(include: i => i.Include(x => x.Appointment));
+            var result = _unitOfWork.MedicalReportsRepository.Get(include: i => (Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<MedicalReport, object>)i.Include(x => x.Appointment));
 
             var totalCount = result.Count();
 

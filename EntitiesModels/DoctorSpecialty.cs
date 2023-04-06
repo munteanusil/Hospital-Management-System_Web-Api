@@ -1,11 +1,11 @@
-﻿using Hospital_Management_System_Web_Api.Entities;
-using Hospital_Management_System_Web_Api.Interface;
+﻿using Hospital_Management_System_Web_Api.Abstractions;
+using Hospital_Management_System_Web_Api.EntitiesModels;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital_Management_System_Web_Api.EntitiesModels
 {
-    public class DoctorSpecialty : IBaseEntity
+    public class DoctorSpecialty : BaseEntity
     {
         [Key]
         public Guid SpecialityId { get; set; }
@@ -14,7 +14,7 @@ namespace Hospital_Management_System_Web_Api.EntitiesModels
         public Doctor DoctorId { get; set; }
         public Doctor Doctor { get; set; }
 
-        public DoctorSpecialty DoctorSpecialities { get; set; }
+        public Specialty Specialty { get; set; }
 
         public Specialty NameSpeciality { get; set; }
         public string[] Licenses { get; set; }
@@ -36,9 +36,7 @@ namespace Hospital_Management_System_Web_Api.EntitiesModels
 
         public ICollection<DoctorSpecialty> DoctorSpecialties { get; set; }
         public ICollection<DoctorPortofolio> ClinicalCase { get; set; }
-        public Guid Id { get => ((IBaseEntity)DoctorSpecialities).Id; set => ((IBaseEntity)DoctorSpecialities).Id = value; }
-        public DateTimeOffset CreatedAt { get => ((IBaseEntity)DoctorSpecialities).CreatedAt; set => ((IBaseEntity)DoctorSpecialities).CreatedAt = value; }
-        public DateTimeOffset UpdatedAt { get => ((IBaseEntity)DoctorSpecialities).UpdatedAt; set => ((IBaseEntity)DoctorSpecialities).UpdatedAt = value; }
-        public bool IsDeleted { get => ((IBaseEntity)DoctorSpecialities).IsDeleted; set => ((IBaseEntity)DoctorSpecialities).IsDeleted = value; }
+       
+    
     }
 }

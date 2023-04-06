@@ -1,5 +1,4 @@
 ﻿using Hospital_Management_System_Web_Api.EntitiesModels;
-using Hospital_Management_System_Web_Api.Interface;
 using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,7 +23,7 @@ namespace Hospital_Management_System_Web_Api.Entities
         public string Cardiology { get; set; }
         public string Laboratory { get; set; }
        
-        public string Surgical { get; set; }
+        public bool Surgical { get; set; }
         //here you can say more about the doctor's specialization and his experience in surgery
 
         public bool Therapeutic { get; set; }
